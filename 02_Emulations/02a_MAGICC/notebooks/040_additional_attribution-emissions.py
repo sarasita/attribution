@@ -36,7 +36,14 @@ columns_list = [f'{year}-01-01 00:00:00' for year in np.arange(1990,2020)]
 
 def adjust_emissions(baseline_df, region, group, scaling_assumption):
     """
-    Adjust emissions for a region based on a scaling assumption."""
+    Remove emissions associated with a specific emitter group (e.g. region = 'CN', group = 'p90p100' corresponds to the top 10% of emitters in China) 
+    between 1990 and 2020. The function relies on two tables containing coefficients that indicate which fraction of global emissions an 
+    emitter group contributes to. This number relates to the aggregated CO2-e emissions across all sectors except AFOLU. 
+    
+    The workflow first estimates the absolute budget from the relative scaling coefficients and next, decomposes CO2-e emissions into individual
+    GHGs (CO2, CH4, N2O) based on 3 assumptions (equal: gases scale with globally aggregated numbers, CO2: emissions are only CO2 based, CH4: 
+    emisions are primarily CH4 based). The function returns a dataframe containing emissions that need to be removed from the baseline
+    """
     scaling_region_to_global_df = pd.read_csv(SCALING_DIR / f"region_to_global_scaling_coefficients.csv", sep = ';', index_col = 0)
     scaling_within_country_df   = pd.read_csv(SCALING_DIR / "within_countries" / f"{region}_scaling.csv", sep = ',', index_col = 0)
 
@@ -102,47 +109,49 @@ groups  = ['p95p100', 'p80p100', 'p70p100', 'p60p100', 'p50p100', 'p10p100', 'p0
 
 #%%
 
-baseline_df = pd.read_csv(EMISSIONS_BASELINE)
-attribution_emissions_df = baseline_df.copy()
+if __name__ == '__main__':
+    baseline_df = pd.read_csv(EMISSIONS_BASELINE)
+    attribution_emissions_df = baseline_df.copy()
 
-scaling_assumption = 'equal'
-for region in regions:
-    for group in groups:
-        co2_removed, ch4_removed, n2o_removed = adjust_emissions(baseline_df.copy(), region, group, scaling_assumption)
-        tmp_df = baseline_df.copy()
-        tmp_df.loc[:, 'scenario'] = f'{region}_{group}_{scaling_assumption}-scaling'
-        tmp_df.loc[tmp_df.variable == 'Emissions|CO2|MAGICC Fossil and Industrial',
-                                    columns_list] -= co2_removed
-        tmp_df.loc[tmp_df.variable == 'Emissions|CH4',
-                                    columns_list] -= ch4_removed
-        tmp_df.loc[tmp_df.variable == 'Emissions|N2O',
-                                    columns_list] -= n2o_removed
-    
-        attribution_emissions_df = pd.concat([attribution_emissions_df, tmp_df], ignore_index=True).copy()
+    scaling_assumption = 'equal'
+    for region in regions:
+        for group in groups:
+            co2_removed, ch4_removed, n2o_removed = adjust_emissions(baseline_df.copy(), region, group, scaling_assumption)
+            tmp_df = baseline_df.copy()
+            tmp_df.loc[:, 'scenario'] = f'{region}_{group}_{scaling_assumption}-scaling'
+            tmp_df.loc[tmp_df.variable == 'Emissions|CO2|MAGICC Fossil and Industrial',
+                                        columns_list] -= co2_removed
+            tmp_df.loc[tmp_df.variable == 'Emissions|CH4',
+                                        columns_list] -= ch4_removed
+            tmp_df.loc[tmp_df.variable == 'Emissions|N2O',
+                                        columns_list] -= n2o_removed
+        
+            attribution_emissions_df = pd.concat([attribution_emissions_df, tmp_df], ignore_index=True).copy()
 
-attribution_emissions_df.to_csv(ATTRIBUTION_EMISSIONS_ADDITIONAL)
+    attribution_emissions_df.to_csv(ATTRIBUTION_EMISSIONS_ADDITIONAL)
 
 #%%
 
 regions = ['IN', 'CN', 'US', 'EU27']
 groups  = ['p95p100', 'p0p100']
 
-baseline_df = pd.read_csv(EMISSIONS_BASELINE)
-attribution_emissions_df = baseline_df.copy()
+if __name__ == '__main__':
+    baseline_df = pd.read_csv(EMISSIONS_BASELINE)
+    attribution_emissions_df = baseline_df.copy()
 
-scaling_assumption = 'equal'
-for region in regions:
-    for group in groups:
-        co2_removed, ch4_removed, n2o_removed = adjust_emissions(baseline_df.copy(), region, group, scaling_assumption)
-        tmp_df = baseline_df.copy()
-        tmp_df.loc[:, 'scenario'] = f'{region}_{group}_{scaling_assumption}-scaling'
-        tmp_df.loc[tmp_df.variable == 'Emissions|CO2|MAGICC Fossil and Industrial',
-                                    columns_list] -= co2_removed
-        tmp_df.loc[tmp_df.variable == 'Emissions|CH4',
-                                    columns_list] -= ch4_removed
-        tmp_df.loc[tmp_df.variable == 'Emissions|N2O',
-                                    columns_list] -= n2o_removed
-    
-        attribution_emissions_df = pd.concat([attribution_emissions_df, tmp_df], ignore_index=True).copy()
+    scaling_assumption = 'equal'
+    for region in regions:
+        for group in groups:
+            co2_removed, ch4_removed, n2o_removed = adjust_emissions(baseline_df.copy(), region, group, scaling_assumption)
+            tmp_df = baseline_df.copy()
+            tmp_df.loc[:, 'scenario'] = f'{region}_{group}_{scaling_assumption}-scaling'
+            tmp_df.loc[tmp_df.variable == 'Emissions|CO2|MAGICC Fossil and Industrial',
+                                        columns_list] -= co2_removed
+            tmp_df.loc[tmp_df.variable == 'Emissions|CH4',
+                                        columns_list] -= ch4_removed
+            tmp_df.loc[tmp_df.variable == 'Emissions|N2O',
+                                        columns_list] -= n2o_removed
+        
+            attribution_emissions_df = pd.concat([attribution_emissions_df, tmp_df], ignore_index=True).copy()
 
-attribution_emissions_df.to_csv(ATTRIBUTION_EMISSIONS_REGION)
+    attribution_emissions_df.to_csv(ATTRIBUTION_EMISSIONS_REGION)

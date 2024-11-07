@@ -43,7 +43,7 @@ from notebooks_v2.config import EMISSIONS_TO_RUN_FILES, MAGICC_RESULT_FILES
 #%%
 
 if __name__ == '__main__':
-    for EMISSIONS_TO_RUN, MAGICC_RESULTS_FILE in zip(EMISSIONS_TO_RUN_FILES[3:4], MAGICC_RESULT_FILES[3:4]):
+    for EMISSIONS_TO_RUN, MAGICC_RESULTS_FILE in zip(EMISSIONS_TO_RUN_FILES[:], MAGICC_RESULT_FILES[:]):
         
         def main():
             # SCENARIO_BATCH_SIZE = 40
@@ -89,13 +89,6 @@ if __name__ == '__main__':
                 "n2o_lastbudgetyear": 1800,
                 "n2o_budget_avgyears": 10,
                 "n2o_feed_yrstart": 1800,
-                # This doesn't really work because the CH4 and N2O cycles go crazy.
-                # "ch4_lastbudgetyear": startyear,
-                # "ch4_budget_avgyears": 1,
-                # "ch4_feed_yrstart": startyear,
-                # "n2o_lastbudgetyear": startyear,
-                # "n2o_budget_avgyears": 1,
-                # "n2o_feed_yrstart": startyear,
                 "out_dynamic_vars": [
                     "DAT_SURFACE_TEMP",
                     "DAT_CO2_CONC",
