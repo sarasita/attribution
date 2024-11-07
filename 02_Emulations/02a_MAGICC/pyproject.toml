@@ -1,0 +1,28 @@
+[tool.poetry]
+package-mode = false
+name = "prototype"
+version = "0.1.0"
+description = "Masters project looking at the impact of different greenhouse gas emissions on warming and other climate impacts"
+authors = ["Carl Doedens <cdoedens@student.unimelb.edu.au>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pre-commit = "3.3.1"
+notebook = "7.0.6"
+jupytext = "1.15.2"
+jupyterlab = "^4.1.2"
+pooch = "^1.8.1"
+scmdata = "^0.17.0"
+seaborn = "^0.13.2"
+ipywidgets = "^8.1.2"
+wheel = "^0.42.0"
+openscm-runner = "^0.13.0"
+pymagicc = "^2.1.5"
+
+[tool.jupytext]
+formats = "ipynb,py:percent"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
