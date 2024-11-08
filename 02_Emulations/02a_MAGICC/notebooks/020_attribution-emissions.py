@@ -126,7 +126,7 @@ if __name__ == '__main__':
         attribution_emissions_df = baseline_df.copy()
         
         for region in regions:
-            for group in groupss:
+            for group in groups:
                 co2_removed, ch4_removed, n2o_removed = adjust_emissions(baseline_df.copy(), region, group, scaling_assumption)
                 tmp_df = baseline_df.copy()
                 tmp_df.loc[:, 'scenario'] = f'{region}_{group}_{scaling_assumption}-scaling'

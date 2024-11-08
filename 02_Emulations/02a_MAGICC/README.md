@@ -14,7 +14,9 @@
 
 We are combining carbon inequality from Chancel 2022 with a framework for efficient climate impact 
 modelling to attribute climate extremes in heat and drought extremes to emissions realted to 
-wealth. This work consists of multiple steps: 
+wealth. 
+
+The files 020, 030 amd 040 generate counterfactual emission pathways as csv-files used for forcing MAGICC 
 
 ## Status
 
