@@ -42,8 +42,8 @@ PROCESSED_GMT_FILE = PROCESSED_GMT_DIR / 'MAGICC-GMT_processed.csv'
 
 # -- FINAL OUTCOMES
 GRAPHICS_DIR = DATA_DIR.parent / '06_Graphics'
-GRAPHICS_PAPER_MAIN_DIR = DATA_DIR.parent / '06_Graphics' / 'paper' / 'v1' / 'main'
-GRAPHICS_PAPER_APPENDIX_DIR = DATA_DIR.parent / '06_Graphics' / 'paper' / 'v1' / 'appendix'
+GRAPHICS_PAPER_MAIN_DIR = DATA_DIR.parent / '06_Graphics' / 'paper' / 'v2' / 'main'
+GRAPHICS_PAPER_APPENDIX_DIR = DATA_DIR.parent / '06_Graphics' / 'paper' / 'v2' / 'appendix'
 RESULTS_DIR  = DATA_DIR / 'Results'
 
 

@@ -1,7 +1,4 @@
-import os
-import sys
-os.chdir('/home/ubuntu/sarah/files/income_decile/')
-sys.path.append('/home/ubuntu/sarah/files/income_decile/')
+
 # computation
 import xarray as xr
 import numpy as np
