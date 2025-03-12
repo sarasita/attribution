@@ -57,9 +57,9 @@ population_shares = [0.0449, 0.0616, 0.170, 0.206]
 
 
 # -- VISUALIZATION
-fontsize_small = 13
-fontsize_medium = 15
-fontsize_large = 17
+fontsize_small = 5
+fontsize_medium = 6
+fontsize_large = 7
 
 
 group_colors = ['darkgray', 

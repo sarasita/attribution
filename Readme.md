@@ -9,7 +9,7 @@ wealth.
 To re-generate our analysis, please follow and complete the steps in the individual subfolders in the following order: 
 
 1. Input 
-2. Emulations - MAGICC
+2. Emulations 
 3. Analysis - 001&002
 4. Emulations - MESMERMTP 
 5. Analysis - 011-014
