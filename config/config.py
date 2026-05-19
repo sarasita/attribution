@@ -26,7 +26,7 @@ WID_skip_alpha2   = ['XC', 'XE', 'XK', 'YU']
 SCALING_DATA_DIR = DATA_DIR / "Scaling"
 
 # ADJUST
-MAGICC_OUTPUT_DIR   = Path('/Users/schoens/Documents/PhD/IIASA/04_Code/gitlab/magicc-attribution/data/0001/interim/magicc-output')
+MAGICC_OUTPUT_DIR   = path_to_output
 
 MAGICC_OUTPUT_FILES = [
                        MAGICC_OUTPUT_DIR / "magicc-results-attribution-standard.csv",
@@ -37,7 +37,7 @@ MAGICC_OUTPUT_FILES = [
                        MAGICC_OUTPUT_DIR / "magicc-results-attribution-region-total.csv",
                        ]
 
-PROCESSED_GMT_DIR = Path('/Users/schoens/Documents/PhD/IIASA/05_Data/MAGICC/Processed/')
+PROCESSED_GMT_DIR = path_to_gmt_data
 PROCESSED_GMT_FILE = PROCESSED_GMT_DIR / 'MAGICC-GMT_processed.csv'
 
 # -- FINAL OUTCOMES
